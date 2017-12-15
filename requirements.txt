@@ -1,6 +1,18 @@
+<<<<<<< HEAD
 flask 
 flask-sqlalchemy 
 mysqlclient 
 flask-migrate 
 flask-wtf 
 flask-login
+=======
+flask-migrate
+flask-wtf
+flask
+flask-sqlalchemy
+mysqlclient
+flask-login
+faker
+gunicorn
+redis
+>>>>>>> manage requirement create
