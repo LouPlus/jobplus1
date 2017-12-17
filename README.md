@@ -18,15 +18,11 @@ LouPlus Team 1 https://www.shiyanlou.com/louplus/python
 
 ```
 $ FLASK_APP=manage.py flask db init
-
 $ FLASK_APP=manage.py flask db migrate -m 'init database'
-
 $ FLASK_APP=manage.py flask db upgrade
 
 $ FLASK_APP=manage.py flask shell
-
 $ from jobplus.scripts import run
-
 $ run()
 ```
 
