@@ -15,8 +15,7 @@ def register_blueprints(app):
 def register_extensions(app):
     db.init_app(app)
     Migrate(app,db)
-    login_manager = LoginManager()
-    login_manager.init_app(app)
+
 
 def create_app(config):
     """可以根据传入的config名称,加载不同的配置
