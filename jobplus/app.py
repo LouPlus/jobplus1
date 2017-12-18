@@ -7,13 +7,15 @@ from jobplus.config import configs
 
 #注册蓝图的函数
 def register_blueprints(app):
-    pass
+    from .handlers import front
+    app.register_blueprint(front)
 
 
 #用于将flask拓展注册到app
 def register_extensions(app):
     db.init_app(app)
     Migrate(app,db)
+
 
 def create_app(config):
     """可以根据传入的config名称,加载不同的配置
