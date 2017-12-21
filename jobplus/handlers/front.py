@@ -24,3 +24,11 @@ def login():
         return redirect(url_for('front.index'))#若登录成功则返回主页
 
     return render_template('login.html',form=form)
+
+# 退出页面注册
+@front.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('你已经退出登录','success')
+    return redirect(url_for('front.index'))
