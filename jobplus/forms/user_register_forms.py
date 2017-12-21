@@ -1,8 +1,5 @@
-#form
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, ValidationError, TextAreaField, IntegerField
-from wtforms.validators import Length, Email, EqualTo, Required, URL, NumberRange
-from jobplus.models.models import db, User
+from .base import *
+from jobplus.models import db, User
 
 
 #Profile表 # by EdwinYang2000

@@ -7,17 +7,6 @@ from flask_migrate import Migrate
 
 from .base_models import db,Base
 
-"""临时测试用"""
-"""
-from flask import Flask, render_template
-app = Flask(__name__)
-app.config.update(dict(SECRET_KEY = 'very secret key',
-                       SQLALCHEMY_DATABASE_URI='mysql+mysqldb://root@localhost:3306/jobweb?charset=utf8'))
-db = SQLAlchemy(app)
-"""
-"""临时测试用"""
-
-
 class User(Base,UserMixin):
     __tablename__ = 'user'
 
