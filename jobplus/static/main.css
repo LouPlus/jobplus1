@@ -11,3 +11,10 @@ a:hover,
 a:visited {
   text-decoration: none !important;
 }
+
+/*设置页脚的属性*/
+.footer-row {
+	font-size: 17px;
+	padding-bottom: 5px;
+	color: #888;
+}
