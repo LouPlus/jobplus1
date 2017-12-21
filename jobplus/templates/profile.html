@@ -3,5 +3,5 @@
 
 {% block body %}
 <h4>个人简历资料</h4>
-{{ render_form(form, url_for('front.profile', user_id=user.id)) }}
+{{ render_form(form, url_for('user.profile', user_id=user.id)) }}
 {% endblock %}
