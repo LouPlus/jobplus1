@@ -30,18 +30,18 @@ $ run()
 - 管理员
 
 
-name = admin
-email = admin@163.com
-password = 123456
+1. name = admin
+2. email = admin@163.com
+3. password = 123456
 
 - 企业用户
 
-name = company
-email = company@163.com
-password = company
+1. name = company
+2. email = company@163.com
+3. password = company
 
 - 招聘用户
 
-name = user
-email = user@163.com
-password = user
+1. name = user
+2. email = user@163.com
+3. password = user
