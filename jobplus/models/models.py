@@ -18,7 +18,7 @@ class User(Base,UserMixin):
     name = db.Column(db.String(32), unique=True, index=True, nullable=False)
     email = db.Column(db.String(64), unique=True, index=True, nullable=False)
     _password = db.Column('password', db.String(256), nullable=False)
-    #这里存logo_img的url
+    #这里存logo_img的url 企业头像或用户头像
     logo_img = db.Column(db.String(128))
     #连接到公司的关系1-1关系
     company = db.relationship('Company', uselist=False)
