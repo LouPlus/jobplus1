@@ -2,7 +2,7 @@ from flask import Blueprint,render_template,flash,redirect,url_for
 from flask import current_app,request
 from flask_login import login_user,logout_user,login_required
 
-from jobplus.forms import LoginForm, UserRegister
+from jobplus.forms import LoginForm, UserRegister,CompanyRegister
 from jobplus.models import User
 
 front = Blueprint('front',__name__)
@@ -12,15 +12,25 @@ front = Blueprint('front',__name__)
 def index():
     return render_template('index.html')
 
-#注册界面
-@front.route('/register', methods=['GET','POST'])
-def register():
+#普通用户注册界面
+@front.route('/user_register', methods=['GET','POST'])
+def user_register():
     form = UserRegister()
     if form.validate_on_submit():
         form.create_user()
         flash('注册成功,请登录','success')
         return redirect(url_for('front.login')) #注册成功后自动跳转到登录界面
     return render_template('register_user.html', form=form)
+
+#企业用户注册界面
+@front.route('/company_register', methods=['GET','POST'])
+def company_register():
+    form = CompanyRegister()
+    if form.validate_on_submit():
+        form.create_user()
+        flash('注册成功,请登录','success')
+        return redirect(url_for('front.login')) #注册成功后自动跳转到登录界面
+    return render_template('register_company.html', form=form)
 
 #登录界面
 @front.route('/login',methods=['GET','POST'])
