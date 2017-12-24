@@ -17,8 +17,8 @@ def profile():
     form = UserProfile(obj=user)
     form.name.data = current_user.name
     form.email.data = current_user.email
-
-def profile(user_id):
-    user = User.query.get_or_404(user_id)
-    form = UserRegister(obj=user)
-
+    if form.validate_on_submit():
+        form.updated_profile(current_user)
+        flash('用户简历更新成功','success')
+        return redirect(url_for('user.profile'))
+    return render_template('profile.html',form=form,user=user)
