@@ -1,10 +1,11 @@
 class BaseConfig(object): 
     """ 配置基类 """ 
     SECRET_KEY = 'makesure to set a very secret key'
+    INDEX_PER_PAGE = 8
 
 class DevelopmentConfig(BaseConfig): 
     """ 开发环境配置 """ 
-    DEBUG = True 
+    DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'mysql+mysqldb://root:Wangmaonan1@localhost:3306/jobplus?charset=utf8'
      
 class ProductionConfig(BaseConfig): 

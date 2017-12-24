@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from flask_migrate import Migrate
+from flask import url_for
 
 from .base_models import db,Base
 
@@ -89,6 +90,11 @@ class Company(Base):
     oneword = db.Column(db.String(256))
     description = db.Column(db.String(256))
 
+
+    @property
+    def url(self):
+        return url_for('company.detail', company_id=self.id)
+
 #职位表
 class Job(Base):
     __tablename__ = 'job'
@@ -103,6 +109,10 @@ class Job(Base):
 
     description = db.Column(db.String(256))
     requirement = db.Column(db.String(256))
+
+    @property
+    def url(self):
+        return url_for('job.detail',job_id = self.id)
 
 class Qualify_Type(enum.Enum):
     UNREAD = 0 #未被阅读
