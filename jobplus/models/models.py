@@ -86,7 +86,7 @@ class Company(Base):
     user = db.relationship('User', uselist=False)
 
     website = db.Column(db.String(128))
-    oneword = db.Column(db.String(64))
+    oneword = db.Column(db.String(64)) #输入企业的关键字,使用逗号隔开
     description = db.Column(db.String(256))
 
 #职位表
