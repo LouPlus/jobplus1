@@ -9,6 +9,20 @@ LouPlus Team 1 https://www.shiyanlou.com/louplus/python
 * [会飞的鳄鱼](https://github.com/luoyuedong)
 * [WMN7](https://github.com/wmn7)
 
+## 使用sql文件初始化数据库
+
+在主目录下有一个jobplus.sql文件，下面导入这个sql文件
+
+
+1. mysql -u root -p  进入数据库
+2. CREATE DATABASE jobplus;创建数据库 
+3. use jobplus; 切换数据库
+4. source /所在路径/jobplus.sql;导入数据库文件  
+
+
+参考资料:http://blog.csdn.net/piaocoder/article/details/51995372
+
+
 ## 初始化数据库
 
 在本地创建数据库 create database jobplus
