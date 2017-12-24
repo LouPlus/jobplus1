@@ -69,6 +69,22 @@ def iter_job():
         requirement = '我们需要有10年的工作经验'
     )
 
+def iter_jobs():
+    user = User.query.filter_by(name='user').first()
+    with open(os.path.join(os.path.dirname(__file__),'../..','data','job.json')) as f:
+        jobs = json.load(f)
+    for job in jobs:
+        yield Job(
+            name = job['name'],
+            location = job['location'],
+            wage = job['wage'],
+            # description = job['description'],
+            # qualifications = job['qualifications'],
+            # experience = job['experience'],
+            # work_time = job['work_time']
+        )
+
+
 #生成投递表
 class Qualify_Type(enum.Enum):
     UNREAD = 0 #未被阅读

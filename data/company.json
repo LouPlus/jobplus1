@@ -1,0 +1,22 @@
+[
+{"name": "\u8ba1\u7b97\u673a\u89c6\u89c9\u7b97\u6cd5\u5de5\u7a0b\u5e08", "location": " [\u53a6\u95e8]", "wage": "20k-40k"},
+{"name": "\u6570\u636e\u6316\u6398\u5de5\u7a0b\u5e08", "location": " [\u53a6\u95e8]", "wage": "15k-30k"},
+{"name": "\u524d\u7aef\u5de5\u7a0b\u5e08", "location": " [\u53a6\u95e8]", "wage": "10k-30k"},
+{"name": "\u9ad8\u7ea7PHP\u5de5\u7a0b\u5e08", "location": " [\u53a6\u95e8]", "wage": "15k-30k"},
+{"name": "\u56fd\u5185UC-\u9ad8\u7ea7\u524d\u7aefweb\u5f00\u53d1\u5de5\u7a0b\u5e08", "location": " [\u5e7f\u5dde]", "wage": "15k-30k"},
+{"name": "\u56fd\u5185UC-\u9ad8\u7ea7\u524d\u7aef\u4e13\u5bb6-\u5e7f\u5dde", "location": " [\u5e7f\u5dde]", "wage": "15k-30k"},
+{"name": "\u56fd\u5185UC-\u524d\u7aef\u6280\u672f\u4e13\u5bb6-UC\u5934\u6761", "location": " [\u5e7f\u5dde]", "wage": "15k-30k"},
+{"name": "\u56fd\u5185UC-\u8d44\u6df1\u524d\u7aef\u5de5\u7a0b\u5e08-\u5e7f\u5dde", "location": " [\u5e7f\u5dde]", "wage": "15k-30k"},
+{"name": "\u56fd\u5185UC-\u8d44\u6df1\u524d\u7aef\u5de5\u7a0b\u5e08-\u6d3b\u52a8\u9879\u76ee\u7ec4", "location": " [\u5e7f\u5dde]", "wage": "15k-30k"},
+{"name": "\u57fa\u7840\u7814\u53d1\u90e8-\u9ad8\u7ea7\u524d\u7aef\u4e13\u5bb6-\u5185\u6838\u7ec4", "location": " [\u5e7f\u5dde]", "wage": "15k-30k"},
+{"name": "\u57fa\u7840\u7814\u53d1\u90e8-\u9ad8\u7ea7\u524d\u7aef\u5f00\u53d1\u5de5\u7a0b\u5e08-\u5e7f\u5dde", "location": " [\u5e7f\u5dde]", "wage": "15k-30k"},
+{"name": "Web \u4e3b\u7a0b", "location": " [\u5357\u4eac]", "wage": "8k-15k"},
+{"name": "\u6570\u636e\u5206\u6790\u5e08", "location": " [\u4e0a\u6d77]", "wage": "10k-30k"},
+{"name": "\u7cfb\u7edf\u8fd0\u7ef4\u5de5\u7a0b\u5e08", "location": " [\u4e0a\u6d77]", "wage": "10k-30k"},
+{"name": "\u8fd0\u7ef4\u5f00\u53d1\u5de5\u7a0b\u5e08", "location": " [\u4e0a\u6d77]", "wage": "10k-30k"},
+{"name": "\u7b97\u6cd5\u5de5\u7a0b\u5e08", "location": " [\u4e0a\u6d77]", "wage": "10k-30k"},
+{"name": "\u5ba2\u6237\u7aef\u7814\u53d1\u5de5\u7a0b\u5e08", "location": " [\u4e0a\u6d77]", "wage": "10k-30k"},
+{"name": "Web\u524d\u7aef\u7814\u53d1\u5de5\u7a0b\u5e08", "location": " [\u4e0a\u6d77]", "wage": "10k-30k"},
+{"name": "\u670d\u52a1\u7aef\u7814\u53d1\u5de5\u7a0b\u5e08", "location": " [\u4e0a\u6d77]", "wage": "10k-30k"},
+{"name": "\u3010\u4e0a\u6d77\u3011 \u301018K-20K\u3011 \u5148\u4eba\u638c\u4fe1\u606f\u79d1\u6280  \u9ad8\u7ea7PHP\u5de5\u7a0b\u5e08", "location": " [\u4e0a\u6d77]", "wage": "18k-20k"}
+]
