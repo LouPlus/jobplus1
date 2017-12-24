@@ -69,7 +69,7 @@ class Employee(Base):
     id = db.Column(db.Integer, primary_key=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', uselist=False)
+    user = db.relationship('User', uselist=False, backref=db.backref('user_detail',uselist=False))
 
     sex = db.Column(db.Enum(SexType), default=SexType.NONE)
     location = db.Column(db.String(64))
