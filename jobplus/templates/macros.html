@@ -18,6 +18,11 @@
     <div class="checkbox">
       <label>{{ field() }} {{ field.label.text }}</label>
     </div>
+    <!--TextAreaField 单独特殊处理-->
+    {% elif field.type == 'TextAreaField' %}
+    <div class="form-group {% if field.errors %} has-error{% endif %}">
+      {{ field.label }} {{ field(rows='5',class='form-control') }}
+    </textarea>
     {% else %}
     <div class="form-group {% if field.errors %} has-error{% endif %}">
       {{ field.label }} {{ field(class='form-control') }}
