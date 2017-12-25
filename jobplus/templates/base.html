@@ -25,6 +25,9 @@
                     <li class="active"><a href="/">首页<span class="sr-only">(current)</span></a></li>
                     <li><a href="{{ url_for('job.job_index') }}">职位</a></li>
                     <li><a href="{{ url_for('company.company_index') }}">公司</a></li>
+                    {% if current_user.is_authenticated and current_user.is_admin %}
+                    <li><a href="{{ url_for('admin.index') }}">控制台</a></li>
+                {% endif %}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">                    
                     {% if not current_user.is_authenticated %}
