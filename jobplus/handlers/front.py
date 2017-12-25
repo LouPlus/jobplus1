@@ -3,14 +3,20 @@ from flask import current_app,request
 from flask_login import login_user,logout_user,login_required
 
 from jobplus.forms import LoginForm, UserRegister,CompanyRegister
-from jobplus.models import User
+from jobplus.models import User,Job,Company
 
 front = Blueprint('front',__name__)
 
 #主页
 @front.route('/')
 def index():
-    return render_template('index.html')
+    page = request.args.get('page', default=1, type=int)
+    jobs = Job.query.paginate(page=page, per_page=current_app.config['INDEX_PER_PAGE'],
+                              error_out=False)
+    companies = Company.query.paginate(page=page, per_page=current_app.config['INDEX_PER_PAGE'],
+                                       error_out=False)
+    return render_template('index.html',pagination=[jobs,companies])
+
 
 #普通用户注册界面
 @front.route('/user_register', methods=['GET','POST'])

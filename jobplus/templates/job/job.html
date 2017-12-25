@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% from "macros.html" import render_pagination %}
 
-{% block title %}职位{% endblock %}
+{% block title %}职位列表{% endblock %}
 {% block body %}
+    <h2 class="h4 mt40 job-list-title">最新职位</h2>
+    <br>
 <div class="row">
     {% for job in  pagination.items %}
     <div class="col-sm-6 job-list-item-block">
         <div class="thumbnail">
             <div class="caption">
-
                 <a href="{{ job.url }}" target="_blank">
                     <h4 class="job_name">{{ job.name }}</h4>
                 </a>
@@ -17,22 +18,40 @@
                     <strong class="job_wage">
                         {{ job.wage }}
                     </strong>
-                    <style type="text/css">
-                   strong{
-                        color:green;
-                        font-weight:bold;
-                    }
-                    h4
-                    {
-                        font-weight:bold;
-                    }
-                    </style>
+                    <span class="job_require">{{ job.requirement }}</span>
                 </div>
-
+                <a href="{{ job.company_url }}" target="_blank">
+                    <h6 class="company_name">{{ job.company.user.name }}</h6>
+                </a>
             </div>
         </div>
     </div>
     {% endfor %}
+<style type="text/css">
+    strong{
+        color:green;
+        font-weight:bold;
+    }
+    h4 {
+        font-weight: bold;
+    }
+    .job-list-title{
+        padding-bottom: 10px;
+        color: #ff1c1e;
+        border-bottom: 1px solid #606060;
+        margin-bottom: 0;
+        font-size:18px;
+    }
+    .caption{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space:nowrap;
+        text-decoration: none !important;
+    }
+
+</style>
 </div>
 {{ render_pagination(pagination, 'job.job_index') }}
 {% endblock %}
+
+
