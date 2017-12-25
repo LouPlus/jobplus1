@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% from "macros.html" import render_pagination %}
+
+{% block title %}职位{% endblock %}
+{% block body %}
+<div class="row">
+    {% for job in  pagination.items %}
+    <div class="col-sm-6 job-list-item-block">
+        <div class="thumbnail">
+            <div class="caption">
+
+                <a href="{{ job.url }}" target="_blank">
+                    <h4 class="job_name">{{ job.name }}</h4>
+                </a>
+                <p class="job_location">{{ job.location }}</p>
+                <div class="text-muted job-require">
+                    <strong class="job_wage">
+                        {{ job.wage }}
+                    </strong>
+                    <style type="text/css">
+                   strong{
+                        color:green;
+                        font-weight:bold;
+                    }
+                    h4
+                    {
+                        font-weight:bold;
+                    }
+                    </style>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{{ render_pagination(pagination, 'job.job_index') }}
+{% endblock %}

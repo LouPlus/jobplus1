@@ -9,7 +9,7 @@ class CompanyRegister(FlaskForm):
     image = StringField('头像链接')
 
     web = StringField('企业网站',validators=[Required()]) 
-    oneword = StringField('关键词',validators=[Required()])
+    oneword = StringField('一句话介绍',validators=[Required()])
     description = TextAreaField('企业介绍', validators=[Required(),Length(10,256)])
 
     submit = SubmitField('提交')
