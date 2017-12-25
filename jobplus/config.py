@@ -6,7 +6,7 @@ class BaseConfig(object):
 class DevelopmentConfig(BaseConfig): 
     """ 开发环境配置 """ 
     DEBUG = True 
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqldb://root:13540144151@localhost:3306/jobplus?charset=utf8'
+    SQLALCHEMY_DATABASE_URI = 'mysql+mysqldb://root:Wangmaonan1@localhost:3306/jobplus?charset=utf8'
     INDEX_PER_PAGE = 8
 
      
