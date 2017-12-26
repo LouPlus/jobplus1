@@ -52,17 +52,17 @@ class CompanyProfile(FlaskForm):
 
     submit = SubmitField('提交')
 
-    def updated_profile(self, user):
+    def updated_profile(self,user):
         #修改企业用户信息
         user.name = self.name.data
         user.email = self.email.data
         user.password = self.password.data
         user.logo_img = self.image.data
-        db.session.add(user)
         #下面是修改用户的详细信息
         company = user.company
         company.website = self.web.data
         company.oneword = self.location.data
         company.description = self.description.data
+        db.session.add(user)
         db.session.add(company)
         db.session.commit()
