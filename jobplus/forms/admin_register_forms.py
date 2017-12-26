@@ -38,7 +38,7 @@ class AdminProfile(FlaskForm):
 
     submit = SubmitField('提交')
 
-    def updated_profile(self, user):
+    def updated_profile(self,user):
         #修改管理员用户信息
         user.name = self.name.data
         user.email = self.email.data

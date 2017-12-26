@@ -55,6 +55,12 @@ def create_company():
 def user_profile(user_id):
     user = User.query.filter_by(id=user_id).first()
     form = UserProfile()
+ 
+    #current_app.logger.debug('1 : '+form.location.data)
+    if form.validate_on_submit():
+        form.updated_profile(user)
+        flash('简历已更新成功','success')
+        return redirect(url_for('admin.user_profile',user_id=user.id))
     form.name.data = user.name
     form.email.data = user.email
     form.image.data = user.logo_img
@@ -62,10 +68,6 @@ def user_profile(user_id):
     form.location.data = user.employee.location
     form.description.data = user.employee.description
     form.resume.data = user.employee.resume
-    if form.validate_on_submit():
-        form.updated_profile(user)
-        flash('简历已更新成功','success')
-        return redirect(url_for('admin.user_profile',user_id=user.id))
     return render_template('admin/profile.html',form=form,user=user)
 
 #修改管理员信息
@@ -74,13 +76,13 @@ def user_profile(user_id):
 def admin_profile(user_id):#修改求职者用户的信息
     user = User.query.filter_by(id=user_id).first()
     form = AdminProfile()
-    form.name.data = user.name
-    form.email.data = user.email
-    form.image.data = user.logo_img
     if form.validate_on_submit():
         form.updated_profile(user)
         flash('简历已更新成功','success')
         return redirect(url_for('user.admin_profile',user_id=user.id))
+    form.name.data = user.name
+    form.email.data = user.email
+    form.image.data = user.logo_img
     return render_template('admin/profile.html',form=form,user=user)
 
 #修改企业用户的信息
@@ -89,14 +91,14 @@ def admin_profile(user_id):#修改求职者用户的信息
 def company_profile(user_id):#修改求职者用户的信息
     user = User.query.filter_by(id=user_id).first()
     form = CompanyProfile()
+    if form.validate_on_submit():
+        form.updated_profile(user)
+        flash('简历已更新成功','success')
+        return redirect(url_for('user.company_profile',user_id=user.id))
     form.name.data = user.name
     form.email.data = user.email
     form.image.data = user.logo_img
     form.web.data = user.company.website
     form.oneword.data = user.company.oneword
     form.description.data = user.company.description
-    if form.validate_on_submit():
-        form.updated_profile(user)
-        flash('简历已更新成功','success')
-        return redirect(url_for('user.company_profile',user_id=user.id))
     return render_template('admin/profile.html',form=form,user=user)
