@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename="bootstrap-3.3.7-dist/css/bootstrap.min.css") }}">
         <link rel="stylesheet" href="{{ url_for('static', filename="main.css") }}">
     </head>
     <body>
@@ -23,11 +23,11 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/">首页<span class="sr-only">(current)</span></a></li>
-                    <li><a href="/">职位</a></li>
-                    <li><a href="/">公司</a></li>
+                    <li><a href="{{ url_for('job.job_index') }}">职位</a></li>
+                    <li><a href="{{ url_for('company.company_index') }}">公司</a></li>
                     {% if current_user.is_authenticated and current_user.is_admin %}
                     <li><a href="{{ url_for('admin.index') }}">控制台</a></li>
-                {% endif %}
+                    {% endif %}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">                    
                     {% if not current_user.is_authenticated %}
@@ -38,8 +38,14 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ current_user.name }}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
+                                {% if current_user.is_admin %}
+                                <li><a href="{{ url_for('user.admin_profile') }}">管理员资料配置</a></li>
+                                {% elif current_user.is_company %}
+                                <li><a href="{{ url_for('user.company_profile') }}">企业资料配置</a></li>
+                                {% else %}
+                                <li><a href="{{ url_for('user.user_profile') }}">用户资料配置</a></li>
+                                {% endif %}
                                 <li role="separator" class="divider"></li>
-                                <li><a href="{{ url_for('user.profile') }}">简历资料配置</a></li>
                                 <li><a href="{{ url_for('front.logout') }}">退出登录</a></li>
                             </ul>
                         </li>
@@ -77,7 +83,7 @@
             </div>
      </div>
       <!-- Bootstrap ?? jQuery -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-      <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="{{ url_for('static', filename="bootstrap-3.3.7-dist/js/jquery-3.2.1.min.js") }}"></script>
+      <script src="{{ url_for('static', filename="bootstrap-3.3.7-dist/js/bootstrap.min.js") }}"></script>
     </body>    
 </html>

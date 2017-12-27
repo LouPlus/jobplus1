@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from flask_migrate import Migrate
+from flask import url_for
 
 from .base_models import db,Base
 
@@ -72,7 +73,7 @@ class Employee(Base):
     user = db.relationship('User', uselist=False, backref=db.backref('user_detail',uselist=False))
 
     sex = db.Column(db.Enum(SexType), default=SexType.NONE)
-    location = db.Column(db.String(64))
+    location = db.Column(db.String(128))
     description = db.Column(db.String(256))
     resume = db.Column(db.String(128))
 
@@ -86,8 +87,13 @@ class Company(Base):
     user = db.relationship('User', uselist=False)
 
     website = db.Column(db.String(128))
-    oneword = db.Column(db.String(64)) #输入企业的关键字,使用逗号隔开
+    oneword = db.Column(db.String(256))
     description = db.Column(db.String(256))
+
+
+    @property
+    def url(self):
+        return url_for('company.detail', company_id=self.id)
 
 #职位表
 class Job(Base):
@@ -103,6 +109,10 @@ class Job(Base):
 
     description = db.Column(db.String(256))
     requirement = db.Column(db.String(256))
+
+    @property
+    def url(self):
+        return url_for('job.detail',job_id = self.id)
 
 class Qualify_Type(enum.Enum):
     UNREAD = 0 #未被阅读
@@ -123,14 +133,3 @@ class Send(Base):
     resume = db.relationship('Employee')
 
     qualify = db.Column(db.Enum(Qualify_Type), default = Qualify_Type.UNREAD)
-
-"""临时测试用"""
-"""
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-if __name__ == '__main__':
-    app.run()
-"""
-"""临时测试用"""
