@@ -19,7 +19,7 @@ def index():
 
 
 #普通用户注册界面
-@front.route('/user_register', methods=['GET','POST'])
+@front.route('/userregister', methods=['GET','POST'])
 def user_register():
     form = UserRegister()
     try:
@@ -32,7 +32,7 @@ def user_register():
     return render_template('register_user.html', form=form)
 
 #企业用户注册界面
-@front.route('/company_register', methods=['GET','POST'])
+@front.route('/companyregister', methods=['GET','POST'])
 def company_register():
     form = CompanyRegister()
     try:
