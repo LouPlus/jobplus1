@@ -38,6 +38,15 @@
         <br>
     </div>
 </div>
+    {%  if current_user.is_authenticated %}
+        {% if not job.current_user_is_send %}
+            <a href="{{ job.apply }}" target="_blank" class="btn btn-success" role="button">投个简历</a>
+        {%  else %}
+            <a href="#" class="btn btn-primary" role="button">已投递</a>
+        {% endif %}
+    {% else %}
+        <a href="{{ job.login }}" target="_blank" class="btn btn-success" role="button">投个简历</a>
+    {% endif %}
 
     <style type="text/css">
    .job-detail-catalog{
@@ -49,6 +58,9 @@
     }
     .cities{
         color: #009a61;
+    }
+    .btn btn-primary{
+        background: green;
     }
     </style>
 {% endblock %}

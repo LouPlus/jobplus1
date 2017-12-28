@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "macros.html" import render_pagination %}
+{% from "macros.html" import render_pagination,render_job,render_company %}
 
 {% block title %}Home{% endblock %}
 
@@ -21,36 +21,21 @@
 <div class="row">
 <div id="jobContent" class="tab-content">
   <div class="tab-pane fade in active" id="job-new">
-     {% for job in  pagination[0].items %}
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <img src="{{ (job.company.user.logo_img)[1:] }}" alt="...">
-        <div class="caption">
-
-          <h5>{{ job.name }}</h5>
-          <p>...</p>
-          <p><a href="{{ job.url }}" class="btn btn-primary" role="button">企业详情</a> <a href="{{ job.company.website }}" class="btn btn-default" role="button">企业官网</a></p>
-        </div>
-      </div>
-    </div>
+     {% for job in  newest[0] %}
+         {{ render_job(job) }}
     {% endfor %}
   </div>
   <div class="tab-pane fade" id="job-hot">
-      {% for job in  pagination[0].items %}
-      <div class="col-sm-6 col-md-3">
-        <div class="thumbnail">
-          <img src="{{ (job.company.user.logo_img)[1:] }}" alt="...">
-          <div class="caption">
-            <h5>{{ job.name }}</h5>
-            <p>...</p>
-            <p><a href="{{ job.url }}" class="btn btn-primary" role="button">企业详情</a> <a href="{{ job.company.website }}" class="btn btn-default" role="button">企业官网</a></p>
-          </div>
-        </div>
-      </div>
+      {% for job in  hot[0] %}
+          {{ render_job(job) }}
       {% endfor %}
     </div>
 </div>
 </div>
+
+    <p class="list-more">
+    <a href="{{ url_for('job.job_index') }}" class="btn btn-success btn-lg list-more-btn">查看更多</a>
+    </p>
 
 <div class="row">
   <ul id="company" class="nav nav-tabs">
@@ -62,49 +47,19 @@
 <div class="row">
 <div id="companyContent" class="tab-content">
   <div class="tab-pane fade in active" id='company-new'>
-      {% for company in  pagination[1].items %}
-      <div class="col-sm-6 col-md-3">
-        <div class="thumbnail">
-          <img src="{{ (company.user.logo_img)[1:] }}" alt="...">
-          <div class="caption">
-            <h5>{{ company.user.name }}</h5>
-            <p>...</p>
-            <p><a href="{{ company.url }}" class="btn btn-primary" role="button">企业详情</a> <a href="{{ company.website }}" class="btn btn-default" role="button">企业官网</a></p>
-          </div>
-        </div>
-      </div>
+      {% for company in  newest[1] %}
+            {{ render_company(company) }}
       {% endfor %}
   </div>
   <div class="tab-pane fade" id='company-hot'>
-      {% for company in  pagination[1].items %}
-      <div class="col-sm-6 col-md-3">
-        <div class="thumbnail">
-          <img src="{{ (company.user.logo_img)[1:] }}" alt="...">
-          <div class="caption">
-            <h5>{{ company.user.name }}</h5>
-            <p>...</p>
-            <p><a href="{{ company.url }}" class="btn btn-primary" role="button">企业详情</a> <a href="{{ company.website }}" class="btn btn-default" role="button">企业官网</a></p>
-          </div>
-        </div>
-      </div>
+      {% for company in  hot[1] %}
+          {{ render_company(company) }}
       {% endfor %}
   </div>
 </div>
 </div>
 
-
-<div class="row">
-  <!--从pagination获取课程对象items-->
-</div>
-<!-- 使用 macro 渲染分页组件 -->
-
-<style type="text/css">
-    .caption{
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space:nowrap;
-        text-decoration: none !important;
-    }
-</style>
-
+     <p class="list-more">
+    <a href="{{ url_for('company.company_index') }}" class="btn btn-success btn-lg list-more-btn">查看更多</a>
+     </p>
 {% endblock %}

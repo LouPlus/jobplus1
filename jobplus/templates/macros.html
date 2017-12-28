@@ -65,3 +65,41 @@
   </ul>
 </nav>
 {% endmacro %}
+
+
+{% macro render_job(job) %}
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <img src="{{ (job.company.user.logo_img)[1:] }}" alt="...">
+        <div class="caption">
+          <h5>{{ job.name }}</h5><span class="create_time">{{ job.created_at | timesince }}</span>
+          <p>...</p>
+          <p><a href="{{ job.url }}" class="btn btn-primary" role="button">企业详情</a> <a href="{{ job.company.website }}" class="btn btn-default" role="button">企业官网</a></p>
+        </div>
+      </div>
+    </div>
+{% endmacro %}
+
+
+
+{% macro render_company(company) %}
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail">
+          <img src="{{ (company.user.logo_img)[1:] }}" alt="...">
+          <div class="caption">
+            <h5>{{ company.user.name }}</h5>
+            <p>...</p>
+            <p><a href="{{ company.url }}" class="btn btn-primary" role="button">企业详情</a> <a href="{{ company.website }}" class="btn btn-default" role="button">企业官网</a></p>
+          </div>
+        </div>
+      </div>
+{% endmacro %}
+
+<style type="text/css">
+    .caption{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space:nowrap;
+        text-decoration: none !important;
+    }
+</style>

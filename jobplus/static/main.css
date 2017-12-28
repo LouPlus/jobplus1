@@ -1,6 +1,6 @@
 .form {
     /* 设置 form 的宽度为 400px */
-    width: 400px;
+    width: 200px;
     /* 设置 form 居中 */
     margin: 0 auto;
 }
@@ -46,4 +46,23 @@ body {
     padding-left: 20px;
     padding-right: 20px;
   }
+}
+
+a.list-more-btn {
+      padding: 10px 138px;
+      color: #5cb85c;
+      background-color: #fff;
+}
+
+.list-more {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.company-detail-catalog{
+    color:red;
+    font-weight:bold;
+}
+.company_website{
+    color: green;
 }

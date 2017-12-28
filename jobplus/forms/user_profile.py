@@ -43,20 +43,19 @@ class ComapnyProfile(FlaskForm):
     oneword = StringField('一句话介绍',validators=[Required()])
     description = TextAreaField('企业介绍', validators=[Required(),Length(10,256)])
 
-
     def updated_profile(self, company):
-        user.name = self.name.data
-        user.email = self.email.data
+        company.name = self.name.data
+        company.email = self.email.data
         if self.password.data:
-            user.password = self.password.data
+            company.password = self.password.data
 
-        if user.user_detail:
-            user_detail = user.user_detail
+        if company.user_detail:
+            user_detail = company.user_detail
 
         else:
             user_detail = Employee()
-            user_detail.user_id = user.id
+            user_detail.user_id = company.id
         self.populate_obj(user_detail)
-        db.session.add(user)
+        db.session.add(company)
         db.session.add(user_detail)
         db.session.commit()

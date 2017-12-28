@@ -10,12 +10,9 @@ front = Blueprint('front',__name__)
 #主页
 @front.route('/')
 def index():
-    page = request.args.get('page', default=1, type=int)
-    jobs = Job.query.paginate(page=page, per_page=current_app.config['INDEX_PER_PAGE'],
-                              error_out=False)
-    companies = Company.query.paginate(page=page, per_page=current_app.config['INDEX_PER_PAGE'],
-                                       error_out=False)
-    return render_template('index.html',pagination=[jobs,companies])
+    jobs = Job.query.order_by(Job.description).limit(8)
+    companies = Company.query.order_by(Company.description.desc()).limit(8)
+    return render_template('index.html',newest=[jobs,companies], hot=[jobs,companies])
 
 
 #普通用户注册界面

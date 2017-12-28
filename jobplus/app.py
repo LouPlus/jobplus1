@@ -4,7 +4,7 @@ from flask_login import LoginManager
 
 from jobplus.models import db,User
 from jobplus.config import configs
-
+import datetime
 #注册蓝图的函数
 def register_blueprints(app):
     from .handlers import front,user,job,company,admin
@@ -30,6 +30,22 @@ def register_extensions(app):
     #用户未登录时,就会被重定向到login_view指定的页面
     login_manager.login_view = 'front.login'
 
+def register_filters(app):
+    @app.template_filter()
+    def timesince(value):
+        now = datetime.datetime.utcnow()
+        delta = now - value
+        if delta.days>365:
+            return '{}年前'.format(delta.days // 365)
+        if delta.days>30:
+            return '{}月前'.format(delta.days // 30)
+        if delta.days>0:
+            return '{}天前'.format(delta.days)
+        if delta.seconds>3600:
+            return '{}小时前'.format(delta.seconds // 3600)
+        if delta.seconds>60:
+            return '{}分钟前'.format(delta.seconds // 60)
+        return '刚刚'
 
 def create_app(config):
     """可以根据传入的config名称,加载不同的配置
@@ -41,5 +57,6 @@ def create_app(config):
     register_extensions(app)
     #注册蓝图
     register_blueprints(app)
+    register_filters(app)
 
     return app
