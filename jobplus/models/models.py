@@ -2,9 +2,10 @@
 
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
+from flask_login import UserMixin,current_user
 from flask_migrate import Migrate
 from flask import url_for
+
 
 from .base_models import db,Base
 
@@ -113,6 +114,19 @@ class Job(Base):
     @property
     def url(self):
         return url_for('job.detail',job_id = self.id)
+
+    @property
+    def apply(self):
+        return url_for('job.apply',job_id = self.id)
+
+    @property
+    def login(self):
+        return url_for('front.login',job_id = self.id)
+
+    @property
+    def current_user_is_send(self):
+        send = Send.query.filter_by(job_id=self.id, user_id=current_user.id).first()
+        return (send is not None)
 
 class Qualify_Type(enum.Enum):
     UNREAD = 0 #未被阅读
