@@ -16,23 +16,29 @@ def index():
 
 
 #普通用户注册界面
-@front.route('/user_register', methods=['GET','POST'])
+@front.route('/userregister', methods=['GET','POST'])
 def user_register():
     form = UserRegister()
-    if form.validate_on_submit():
+    try:
+        form.validate_on_submit()
         form.create_user()
         flash('注册成功,请登录','success')
         return redirect(url_for('front.login')) #注册成功后自动跳转到登录界面
+    except:
+        flash('注册失败,请重新注册','warning')
     return render_template('register_user.html', form=form)
 
 #企业用户注册界面
-@front.route('/company_register', methods=['GET','POST'])
+@front.route('/companyregister', methods=['GET','POST'])
 def company_register():
     form = CompanyRegister()
-    if form.validate_on_submit():
+    try:
+        form.validate_on_submit()
         form.create_user()
-        flash('注册成功,请登录','success')
+        flash('注册成功,请登录', 'success')
         return redirect(url_for('front.login')) #注册成功后自动跳转到登录界面
+    except:
+        flash('注册失败,请重新注册','warning')
     return render_template('register_company.html', form=form)
 
 #登录界面
