@@ -1,6 +1,6 @@
 .form {
     /* 设置 form 的宽度为 400px */
-    width: 400px;
+    width: 200px;
     /* 设置 form 居中 */
     margin: 0 auto;
 }
@@ -10,4 +10,59 @@ a,
 a:hover,
 a:visited {
   text-decoration: none !important;
+}
+
+/*设置页脚的属性*/
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -60px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+  height: 60px;
+}
+#footer {
+  background-color: #f5f5f5;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+a.list-more-btn {
+      padding: 10px 138px;
+      color: #5cb85c;
+      background-color: #fff;
+}
+
+.list-more {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.company-detail-catalog{
+    color:red;
+    font-weight:bold;
+}
+.company_website{
+    color: green;
 }

@@ -1,0 +1,105 @@
+<!-- 这里存放宏的代码 -->
+
+<!-- 需要传入2个参数：要渲染的 form 和点击提交请要求的 url -->
+{% macro render_form(form, url) %}
+<form method="POST" action="{{ url }}">
+  <!-- 将 csrf_token 渲染在表单开始的位置 -->
+  {{ form.csrf_token }}
+  <!-- 迭代每个表单 field -->
+  {% for field in form %}
+    <!-- 如果是 csrf_token 就不再渲染了 -->
+    {% if field.type == 'CSRFTokenField' %}
+    {{ '' }}
+    <!-- SubmitField 单独特殊处理 -->
+    {% elif field.type == 'SubmitField' %}
+    {{ form.submit(class='btn btn-primary', type='submit') }}
+    <!-- BooleanField 单独特殊处理 -->
+    {% elif field.type == 'BooleanField' %}
+    <div class="checkbox">
+      <label>{{ field() }} {{ field.label.text }}</label>
+    </div>
+    <!--TextAreaField 单独特殊处理-->
+    {% elif field.type == 'TextAreaField' %}
+    <div class="form-group {% if field.errors %} has-error{% endif %}">
+      {{ field.label }} {{ field(rows='5',class='form-control') }}
+    </div>
+    {% else %}
+    <div class="form-group {% if field.errors %} has-error{% endif %}">
+      {{ field.label }} {{ field(class='form-control') }}
+      <!-- 当 errors 不为空，遍历显示每一个 error -->
+    {% if field.errors %}
+      {% for error in field.errors %}
+        <!-- 根据 Bootstrap 样式错误信息要显示先类为 help-block 的 span 标签中-->
+        <span class="help-block">{{ error }}</span>
+      {% endfor %}
+    {% endif %}
+    </div>
+    {% endif %}
+  {% endfor %}
+</form>
+{% endmacro %}
+
+
+
+
+{% macro render_pagination(pagination, endpoint) %}
+<nav class="nav-pagination" aria-label="Page navigation">
+  <ul class=pagination>
+  <!-- 链接到上一页的左箭头（&laquo;），如果没有上一页设为 disable 状态 -->
+  <li{% if not pagination.has_prev %} class="disabled"{% endif %}><a href="{{url_for(endpoint, page=pagination.prev_num) if pagination.has_prev else '#'}}">&laquo;</a></li>
+  <!-- 渲染每个页数的按钮 -->
+  {% for page in pagination.iter_pages() %}
+    {% if page %}
+      {% if page != pagination.page %}
+        <li><a href="{{ url_for(endpoint, page=page) }}">{{ page }}</a></li>
+      {% else %}
+        <!-- 如果页数是当前页，设置为选中状态 -->
+        <li class="active"><a href="#">{{page}} <span class="sr-only">(current)</span></a></li>
+      {% endif %}
+    {% else %}
+      <li><span class=ellipsis>…</span></li>
+    {% endif %}
+  {% endfor %}
+   <!-- 链接到下一页的右箭头（&raquo;），如果没有下一页设为 disable 状态 -->
+  <li{% if not pagination.has_next %} class="disabled"{% endif %}><a href="{{url_for(endpoint, page=pagination.next_num) if pagination.has_next else '#'}}">&raquo;</a></li>
+  </ul>
+</nav>
+{% endmacro %}
+
+
+{% macro render_job(job) %}
+    <div class="col-sm-6 col-md-3">
+      <div class="thumbnail">
+        <img src="{{ (job.company.user.logo_img)[1:] }}" alt="...">
+        <div class="caption">
+          <h5>{{ job.name }}</h5><span class="create_time">{{ job.created_at | timesince }}</span>
+          <p>...</p>
+          <p><a href="{{ job.url }}" class="btn btn-primary" role="button">企业详情</a> <a href="{{ job.company.website }}" class="btn btn-default" role="button">企业官网</a></p>
+        </div>
+      </div>
+    </div>
+{% endmacro %}
+
+
+
+{% macro render_company(company) %}
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail">
+          <img src="{{ (company.user.logo_img)[1:] }}" alt="...">
+          <div class="caption">
+            <h5>{{ company.user.name }}</h5>
+            <p>...</p>
+            <p><a href="{{ company.url }}" class="btn btn-primary" role="button">企业详情</a> <a href="{{ company.website }}" class="btn btn-default" role="button">企业官网</a></p>
+          </div>
+        </div>
+      </div>
+{% endmacro %}
+
+<style type="text/css">
+    .caption{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space:nowrap;
+        text-decoration: none !important;
+    }
+</style>

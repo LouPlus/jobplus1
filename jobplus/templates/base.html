@@ -1,20 +1,89 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="UTF-8">
         <title>{% block title %}{% endblock %}</title>
-        {% block head_css %}
         <link rel="stylesheet" href="{{ url_for('static', filename="bootstrap-3.3.7-dist/css/bootstrap.min.css") }}">
         <link rel="stylesheet" href="{{ url_for('static', filename="main.css") }}">
-        {% endblock %}
     </head>
-        {% block body %}{% endblock %}
-        {% block footer %}{% endblock %}
+    <body>
+        <div id="wrap">
+            <nav class="navbar navbar-default">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">JobPlus</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">首页<span class="sr-only">(current)</span></a></li>
+                    <li class="{% if active == 'job' %}active{% endif %}"><a href="{{ url_for('job.job_index') }}">职位<span class="sr-only">(current)</span></a></li>
+                    <li class="{% if active == 'company' %}active{% endif %}"><a href="{{ url_for('company.company_index') }}">公司<span class="sr-only">(current)</span></a></li>
+                    {% if current_user.is_authenticated and current_user.is_admin %}
+                    <li><a href="{{ url_for('admin.index') }}">控制台</a></li>
+                    {% endif %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">                    
+                    {% if not current_user.is_authenticated %}
+                        <li><a href="{{ url_for('front.company_register') }}">公司注册</a></li>
+                        <li><a href="{{ url_for('front.user_register')}}">求职者注册</a></li>
+                        <li><a href="{{ url_for('front.login') }}">登录</a></li>
+                    {% else %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ current_user.name }}<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                {% if current_user.is_admin %}
+                                <li><a href="{{ url_for('user.admin_profile') }}">管理员资料配置</a></li>
+                                {% elif current_user.is_company %}
+                                <li><a href="{{ url_for('user.company_profile') }}">企业资料配置</a></li>
+                                {% else %}
+                                <li><a href="{{ url_for('user.user_profile') }}">用户资料配置</a></li>
+                                {% endif %}
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{{ url_for('front.logout') }}">退出登录</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+                </ul>
+                </div><!-- /.navbar-collapse -->
+            </nav>
+        
+            <div class="container">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                {% block body %}{% endblock %}
+                {% block footer %}{% endblock %}
+            </div>
+            <div id="push"></div>
         </div>
-    </body>
-    <!-- Bootstrap 依赖 jQuery -->
-    {% block tail_js %}
-    <script src="{{ url_for('static', filename="bootstrap-3.3.7-dist/js/jquery-3.2.1.min.js") }}"></script>
-    <script src="{{ url_for('static', filename="bootstrap-3.3.7-dist/js/bootstrap.min.js") }}"></script>
-    {% endblock %}
+
+      <div id="footer">
+            <div class="container">
+                <div class="col-md-6">
+                        <p>网站基于python3 flask框架搭建</p>
+                        <p>前端基于bootstrap模板</p>
+                </div>
+                <div class="col-md-6">
+                    <p>Proudly hosted by GitHub</p>
+                </div>
+            </div>
+     </div>
+      <!-- Bootstrap ?? jQuery -->
+      <script src="{{ url_for('static', filename="bootstrap-3.3.7-dist/js/jquery-3.2.1.min.js") }}"></script>
+      <script src="{{ url_for('static', filename="bootstrap-3.3.7-dist/js/bootstrap.min.js") }}"></script>
+    </body>    
 </html>

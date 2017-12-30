@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% from "macros.html" import render_pagination,render_job,render_company %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<!--这是页头部分的文件-->
+<div class="jumbotron">
+    <h1>Hello, world!</h1>
+    <p>...</p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+</div>
+
+<div class="row">
+  <ul id="job" class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="#job-new" data-toggle="tab">最新职位</a></li>
+    <li role="presentation"><a href="#job-hot" data-toggle="tab">热门职位</a></li>
+  </ul>
+</div>
+
+<div class="row">
+<div id="jobContent" class="tab-content">
+  <div class="tab-pane fade in active" id="job-new">
+     {% for job in  newest[0] %}
+         {{ render_job(job) }}
+    {% endfor %}
+  </div>
+  <div class="tab-pane fade" id="job-hot">
+      {% for job in  hot[0] %}
+          {{ render_job(job) }}
+      {% endfor %}
+    </div>
+</div>
+</div>
+
+    <p class="list-more">
+    <a href="{{ url_for('job.job_index') }}" class="btn btn-success btn-lg list-more-btn">查看更多</a>
+    </p>
+
+<div class="row">
+  <ul id="company" class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="#company-new" data-toggle="tab">最新公司</a></li>
+    <li role="presentation"><a href="#company-hot" data-toggle="tab">热门公司</a></li>
+  </ul>
+</div>
+
+<div class="row">
+<div id="companyContent" class="tab-content">
+  <div class="tab-pane fade in active" id='company-new'>
+      {% for company in  newest[1] %}
+            {{ render_company(company) }}
+      {% endfor %}
+  </div>
+  <div class="tab-pane fade" id='company-hot'>
+      {% for company in  hot[1] %}
+          {{ render_company(company) }}
+      {% endfor %}
+  </div>
+</div>
+</div>
+
+     <p class="list-more">
+    <a href="{{ url_for('company.company_index') }}" class="btn btn-success btn-lg list-more-btn">查看更多</a>
+     </p>
+{% endblock %}

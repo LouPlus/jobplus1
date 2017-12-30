@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% from "macros.html" import render_form %}
+
+{% block body %}
+<h4>个人简历资料</h4>
+{% if current_user.is_admin %}
+    {{ render_form(form, url_for('user.admin_profile')) }}
+{% elif current_user.is_company %}
+    {{ render_form(form, url_for('user.company_profile')) }}
+{% else %}
+    {{ render_form(form, url_for('user.user_profile')) }}
+{% endif %}
+
+{% endblock %}
