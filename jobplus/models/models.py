@@ -140,6 +140,7 @@ class Send(Base):
 
     id = db.Column(db.Integer, primary_key=True)
 
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), index=True)
     company_id = db.Column(db.Integer, db.ForeignKey('company.id'))
     job_id = db.Column(db.Integer, db.ForeignKey('job.id'))
     employee_id = db.Column(db.Integer, db.ForeignKey('employee.id'))
