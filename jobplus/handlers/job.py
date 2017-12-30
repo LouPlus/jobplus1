@@ -37,3 +37,40 @@ def apply(job_id):
         db.session.commit()
         flash('投递成功','success')
     return redirect(url_for('job.detail',job_id=job.id))
+
+#职位下线
+@job.route('/<int:job_id>/disable')
+def disable(job_id):
+    job = Job.query.get_or_404(job_id)
+    if not current_user.is_admin and current_user.id != job.company_id:
+        abord(404)
+    if job.is_disable:
+        flash('已下线', 'warning')
+    else:
+        job.is_disable=True
+        db.session.add(job)
+        db.session.commit()
+        flash('下线成功', 'success')
+    if current_user.is_admin:
+        return redirect(url_for('admin.jobs'))
+    else:
+        return redirect(url_for('company.admin_index', company_id=job.company.id))
+
+#职位上线
+@job.route('/<int:job_id>/enable')
+def enable(job_id):
+    job = Job.query.get_or_404(job_id)
+    if not current_user.is_admin and current_user.id != job.company_id:
+        abord(404)
+    if job.is_disable:
+        job.is_disable=False
+        db.session.add(job)
+        db.session.commit()
+        flash('上线成功', 'success')
+    else:
+        flash('已上线', 'warning')
+    if current_user.is_admin:
+        return redirect(url_for('admin.jobs'))
+    else:
+        return redirect(url_for('company.admin_index', company_id=job.company.id))
+
