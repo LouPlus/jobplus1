@@ -1,0 +1,57 @@
+{% extends "admin/index.html" %}
+{% from "macros.html" import render_pagination %}
+
+{% block title %}
+Admin - jobs
+{% endblock %}
+
+{% block operation %}
+{% endblock %}
+
+{% block admin %}
+<a href="{{ url_for('admin.create_user') }}" type="button" class="btn btn-primary">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    添加求职者
+</a>
+
+<a href="{{ url_for('admin.create_company') }}" type="button" class="btn btn-primary">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    添加企业
+</a>
+<table class="table text-nowrap">
+    <thread>
+        <tr>
+            <th>ID</th>
+            <th>职位名称</th>
+            <th>企业名称</th>
+            <th>发布时间</th>
+            <th>状态</th>
+        </tr>
+        <tbody>
+            {% for jobs in pagination.items %}
+            <tr>
+                <td>{{ jobs.id }}</td>
+                <td>{{ jobs.name }}</td>
+                <td>{{ jobs.company.user.name }}</td>
+                <td>{{ jobs.created_at }}</td>
+                <td>
+                    <div class="btn-group" role="group">
+                    {% if not jobs.is_disable %}
+                    <a href="{{ url_for('job.disable', job_id=jobs.id) }}" type="button" class="btn btn-default">
+                            下线
+                        </a>
+                    {% else %}
+                    <a href='{{ url_for('job.enable', job_id=jobs.id) }}' type="button" class="btn btn-primary">
+                            上线
+                        </a>
+                    {% endif %}
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </thread>
+</table>
+
+{{ render_pagination(pagination, 'admin.jobs') }}
+{% endblock %}

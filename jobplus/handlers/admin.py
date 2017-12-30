@@ -2,7 +2,7 @@ from flask import Blueprint,render_template,flash,redirect,url_for
 from flask import current_app,request
 from flask_login import login_user,logout_user,login_required
 from jobplus.decorators import admin_required
-from jobplus.models.models import User
+from jobplus.models.models import User, Job
 from jobplus.forms import UserRegister,CompanyRegister,AdminRegister,UserProfile,AdminProfile,CompanyProfile
 
 
@@ -25,6 +25,19 @@ def users():
         error_out=False
     )
     return render_template('admin/users.html',pagination=pagination)
+
+#管理职位
+@admin.route('/jobs')
+@admin_required
+def jobs():
+    page = request.args.get('page', default=1,type=int)
+    pagination = Job.query.paginate(
+        page=page,
+        per_page=current_app.config['ADMIN_PER_PAGE'],
+        error_out=False
+    )
+    return render_template('admin/jobs.html', pagination=pagination)
+
 
 #增加用户
 @admin.route('/users/adduser',methods=['GET','POST'])
@@ -55,7 +68,7 @@ def create_company():
 def user_profile(user_id):
     user = User.query.filter_by(id=user_id).first()
     form = UserProfile()
- 
+
     #current_app.logger.debug('1 : '+form.location.data)
     if form.validate_on_submit():
         form.updated_profile(user)

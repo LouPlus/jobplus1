@@ -110,7 +110,7 @@ class Job(Base):
 
     description = db.Column(db.String(256))
     requirement = db.Column(db.String(256))
-
+    is_disable = db.Column(db.Boolean, default=False)
     @property
     def url(self):
         return url_for('job.detail',job_id = self.id)
