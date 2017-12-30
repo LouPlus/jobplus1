@@ -31,8 +31,8 @@ class CompanyRegister(FlaskForm):
         db.session.commit()
         return user
 
-    def validate_name(self,field): #update username --> name
-        if User.query.filter_by(name=field.data).first():
+    def validate_username(self,field):
+        if User.query.filter_by(username=field.data).first():
             raise ValidationError('用户名已经存在')
 
     def validate_email(self,field):
