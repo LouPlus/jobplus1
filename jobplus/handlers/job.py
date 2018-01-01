@@ -1,7 +1,8 @@
 from flask import Blueprint,render_template,flash,redirect,url_for
-from flask import current_app,request
+from flask import current_app,request, abort
 from flask_login import login_user,logout_user,login_required,current_user
 from jobplus.models import Job,Send,db
+
 
 job = Blueprint('job',__name__, url_prefix='/jobs')
 
@@ -26,7 +27,7 @@ def apply(job_id):
     if current_user.employee.resume is None:
         flash('请上传简历','warnning')
     elif job.current_user_is_send:
-        flash('已投递过简历','waring')
+        flash('已投递过简历','warning')
     else:
         send = Send(
             job_id=job.id,
@@ -43,7 +44,7 @@ def apply(job_id):
 def disable(job_id):
     job = Job.query.get_or_404(job_id)
     if not current_user.is_admin and current_user.id != job.company_id:
-        abord(404)
+        abort(404)
     if job.is_disable:
         flash('已下线', 'warning')
     else:
@@ -61,7 +62,7 @@ def disable(job_id):
 def enable(job_id):
     job = Job.query.get_or_404(job_id)
     if not current_user.is_admin and current_user.id != job.company_id:
-        abord(404)
+        abort(404)
     if job.is_disable:
         job.is_disable=False
         db.session.add(job)
