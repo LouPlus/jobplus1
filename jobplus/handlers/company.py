@@ -20,7 +20,8 @@ def company_index():
 @company.route('/<int:company_id>')
 def detail(company_id):
     company = Company.query.get_or_404(company_id)
-    return render_template('company/detail.html', company=company)
+    jobs = Job.query.filter_by(company_id=company_id)
+    return render_template('company/detail.html', company=company,jobs=jobs)
 
 #进去企业管理界面
 @company.route('/admin')
