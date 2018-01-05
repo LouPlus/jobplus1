@@ -43,7 +43,7 @@ def apply(job_id):
 @job.route('/<int:job_id>/disable')
 def disable(job_id):
     job = Job.query.get_or_404(job_id)
-    if not current_user.is_admin and current_user.id != job.company_id:
+    if not current_user.is_admin and current_user.company.id != job.company_id:
         abort(404)
     if job.is_disable:
         flash('已下线', 'warning')
@@ -56,12 +56,13 @@ def disable(job_id):
         return redirect(url_for('admin.jobs'))
     else:
         return redirect(url_for('company.admin_index', company_id=job.company.id))
+    
 
 #职位上线
 @job.route('/<int:job_id>/enable')
 def enable(job_id):
     job = Job.query.get_or_404(job_id)
-    if not current_user.is_admin and current_user.id != job.company_id:
+    if not current_user.is_admin and current_user.company.id != job.company_id:
         abort(404)
     if job.is_disable:
         job.is_disable=False

@@ -21,12 +21,12 @@
 <div class="row">
 <div id="jobContent" class="tab-content">
   <div class="tab-pane fade in active" id="job-new">
-     {% for job in  newest[0] %}
+     {% for job in newest[0] %}
          {{ render_job(job) }}
     {% endfor %}
   </div>
   <div class="tab-pane fade" id="job-hot">
-      {% for job in  hot[0] %}
+      {% for job in hot[0] %}
           {{ render_job(job) }}
       {% endfor %}
     </div>
@@ -47,12 +47,12 @@
 <div class="row">
 <div id="companyContent" class="tab-content">
   <div class="tab-pane fade in active" id='company-new'>
-      {% for company in  newest[1] %}
+      {% for company in newest[1] %}
             {{ render_company(company) }}
       {% endfor %}
   </div>
   <div class="tab-pane fade" id='company-hot'>
-      {% for company in  hot[1] %}
+      {% for company in hot[1] %}
           {{ render_company(company) }}
       {% endfor %}
   </div>

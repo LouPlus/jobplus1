@@ -30,6 +30,7 @@ def register_extensions(app):
     #用户未登录时,就会被重定向到login_view指定的页面
     login_manager.login_view = 'front.login'
 
+# jinjia里的函数
 def register_filters(app):
     @app.template_filter()
     def timesince(value):
