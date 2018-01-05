@@ -147,6 +147,8 @@ class Send(Base):
     job_id = db.Column(db.Integer, db.ForeignKey('job.id'))
     employee_id = db.Column(db.Integer, db.ForeignKey('employee.id'))
 
+    user = db.relationship('User')##add
     resume = db.relationship('Employee')
+    job = db.relationship('Job')##add
 
     qualify = db.Column(db.Enum(Qualify_Type), default = Qualify_Type.UNREAD)
