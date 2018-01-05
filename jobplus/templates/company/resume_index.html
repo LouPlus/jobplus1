@@ -26,12 +26,13 @@
                 <tbody>
                     {% for send in pagination.items %}
                         {% if send.qualify.name == 'UNREAD' %}
+                        <!--这里只显示未读的记录-->
                         <tr>
                             <td>{{ send.id }}</td>
                             <td>{{ send.job.name }}</td>
                             <td>{{ send.user.name }}</td>
-                            <td>{{ send.user.employee.description }}</td>
-                            <td>{{ send.user.employee.resume }}</td>
+                            <td>{{ send.resume.description }}</td>
+                            <td>{{ send.resume.resume }}</td>
                             <td>{{ send.created_at }}</td>
                             <td>{{ send.qualify.name }}</td>
                             <td>
@@ -48,6 +49,7 @@
         </table>
     </div>
     <div class="tab-pane" id="unqualifiedlist">
+    <!--不合适列表-->
         <table class="table text-nowrap">
             <thread>
                 <tr>
@@ -78,6 +80,7 @@
         </table>
     </div>
     <div class="tab-pane" id="interviewlist">
+    <!--面试列表-->
         <table class="table text-nowrap">
             <thread>
                 <tr>

@@ -12,15 +12,16 @@ class JobForm(FlaskForm):
 
     submit = SubmitField('提交')
 
-    def create_job(self, company): #创建新工作
+    def create_job(self, user): #创建新工作
         job = Job()
         self.populate_obj(job)
-        job.company_id = company.id
+        job.company_id = user.company.id
         db.session.add(job)
         db.session.commit()
         return job
 
-    def edit_job(self, job): #编辑工作
+    def edit_job(self, job_id): #编辑工作
+        job = Job.query.filter_by(id=job_id).first()
         self.populate_obj(job)
         db.session.add(job)
         db.session.commit()
